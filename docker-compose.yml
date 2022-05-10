@@ -1,0 +1,32 @@
+version: "3.8"
+
+networks:
+  development:
+    name: dev
+
+services:
+
+  #----------------------------------------------
+  #   Development on localhost
+  #     Here, the expectation is that you will be
+  #     running the Spring App from localhost and
+  #     through a debugger or something like that.
+  #-----------------------------------------------
+  mongo-dev:
+    image: mongo
+    networks:
+      - development
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: very_secure
+    ports:
+      - "27017:27017"
+  zipkin-dev:
+    image: ghcr.io/openzipkin/zipkin-slim
+    networks:
+      - development
+    container_name: zipkin
+    environment:
+      - ZIPKIN_ENABLED=true
+    ports:
+      - "9411:9411"

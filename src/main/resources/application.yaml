@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: zip-co-api
+  data:
+    mongodb:
+      auto-index-creation: true
+      authentication-database: admin
+      username: ${MONGO_USERNAME:admin}
+      password: ${MONGO_PASSWORD:very_secure}
+      database: ${MONGO_DB:users}
+      port: ${MONGO_PORT:27017}
+      host: ${MONGO_HOST:localhost}
+  zipkin:
+    base-url: ${ZIPKIN_BASE_URL}
+    api-path: /api/v2/spans
+    enabled: ${ZIPKIN_ENABLED:true}
+
+springdoc:
+  api-docs:
+    path: /docs
+  swagger-ui:
+    path: /swagger
+
+server:
+  error:
+    include-binding-errors: ${INCLUDE_BINDING_ERRORS:never}
+    include-message: ${INCLUDE_ERROR_MESSAGE:always}
+    include-stacktrace: ${INCLUDE_STACKTRACE:never}
